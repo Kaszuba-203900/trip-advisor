@@ -1,4 +1,4 @@
-package com.tul.ta.Controllers;
+package com.tul.ta.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

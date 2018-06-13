@@ -21,11 +21,11 @@ public class FlightSchedulesController {
 
     @RequestMapping(value = "/schedule", method = RequestMethod.GET)
     public String getSchedule(
-            //@RequestParam(value = "origin", required = true) String origin,
-            //@RequestParam(value = "destination", required = true) String destination,
-            //@RequestParam(value = "departureDate", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date departureDate
+            @RequestParam(value = "origin") String origin,
+            @RequestParam(value = "destination") String destination,
+            //@RequestParam(value = "departureDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date departureDate
+            @RequestParam(value = "departureDate") String departureDate
     ) {
-        //return this.flightService.getSchedules(AirportCode.valueOf(origin), AirportCode.valueOf(destination), departureDate.toString(), true);
-        return this.flightService.getSchedules(AirportCode.FRA, AirportCode.ZRH, "2018-06-11", true);
+        return this.flightService.getSchedules(AirportCode.valueOf(origin), AirportCode.valueOf(destination), departureDate.toString(), true);
     }
 }

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -19,10 +20,19 @@ public class HttpQueryUtils {
     private ApiAuthentication apiAuthenticationClient;
 
     public <T> T executeQuery(String uriString, Class<T> responseType) {
+        return executeQuery(uriString, responseType, apiAuthenticationClient, restTemplate);
+    }
+
+    public <T> T executeQuery(String uriString, Class<T> responseType, ApiAuthentication apiAuthentication, RestTemplate restTemplate) {
+        return executeQuery(uriString, responseType, apiAuthentication, restTemplate, 3);
+    }
+
+    public <T> T executeQuery(String uriString, Class<T> responseType, ApiAuthentication apiAuthentication, RestTemplate restTemplate, final int maxRetries) {
+        int counter = 0;
         while (true) {
             HttpHeaders headers = new HttpHeaders();
-            logger.info(apiAuthenticationClient.getAuthHeader());
-            headers.add("Authorization", apiAuthenticationClient.getAuthHeader());
+            logger.info(apiAuthentication.getAuthHeader());
+            headers.add("Authorization", apiAuthentication.getAuthHeader());
             headers.add("Accept", "application/json");
 
             HttpEntity request = new HttpEntity(headers);
@@ -36,11 +46,15 @@ public class HttpQueryUtils {
             if (status > 299) {
                 if (status == 401) {
                     logger.info("Authentication error. Token will be refreshed");
-                    if (apiAuthenticationClient.updateAccessToken()) {
-                        logger.info("Token succesfully refreshed");
-                        continue;
+                    if(counter < maxRetries) {
+                        counter++;
+                        if (apiAuthentication.updateAccessToken()) {
+                            logger.info("Token succesfully refreshed");
+                            continue;
+                        }
                     }
                 }
+                throw new HttpClientErrorException(response.getStatusCode());
             }
             return response.getBody();
         }

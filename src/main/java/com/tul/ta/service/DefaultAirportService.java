@@ -1,5 +1,6 @@
 package com.tul.ta.service;
 
+import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.airport.Airport;
 import com.tul.ta.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class DefaultAirportService implements AirportService{
     @Override
     public List<Airport> getAll() {
         return airportRepository.findAll();
+    }
+
+    @Override
+    public Airport getAirportById(String airportCode) {
+        return airportRepository.findById(airportCode)
+                .orElseThrow(() -> new ResourceNotFoundException("Airport", "id", airportCode));
     }
 
     @Override

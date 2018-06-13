@@ -1,11 +1,11 @@
-package com.tul.ta.model.schedule;
+package com.tul.ta.dto.schedule;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class FlightSchedules {
+public class FlightSchedulesDto {
     @JsonProperty(value = "ScheduleResource")
-    ScheduleResource scheduleResource;
+    ScheduleResourceDto scheduleResource;
 
 }

@@ -1,4 +1,4 @@
-package com.tul.ta.model.airport;
+package com.tul.ta.dto.airport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Airports {
+public class AirportsDto {
     @JsonProperty(value = "Airport")
-    public List<Airport> airport;
+    public List<AirportDto> airport;
 }

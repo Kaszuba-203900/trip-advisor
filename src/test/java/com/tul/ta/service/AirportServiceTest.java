@@ -34,7 +34,13 @@ public class AirportServiceTest {
 
     @Test(expected = ResourceNotFoundException.class)
     public void whenValidAirportCodeThenAirportShouldBeFound() {
-        Airport AAL = new Airport("AAL", "AAL", "DK", "Airport", 2, "Europe/Copenhagen");
+        Airport AAL = Airport.builder()
+                .airportCode("AAL")
+                .cityCode("AAL")
+                .countryCode("DK")
+                .utcOffset(2)
+                .timeZoneId("European/Copenhagen")
+                .build();
 
         Mockito.when(airportRepository.findById(AAL.getAirportCode())
                 .orElseThrow(() -> new ResourceNotFoundException("Airport", "id", "AAL")))

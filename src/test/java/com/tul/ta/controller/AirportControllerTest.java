@@ -1,5 +1,6 @@
 package com.tul.ta.controller;
 
+import com.tul.ta.mapper.AirportDtoMapper;
 import com.tul.ta.model.airport.Airport;
 import com.tul.ta.service.AirportService;
 import org.junit.Test;
@@ -22,8 +23,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(FlightAirportsController.class)
-public class FlightAirportsControllerTest {
+@WebMvcTest(AirportController.class)
+public class AirportControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -31,9 +32,18 @@ public class FlightAirportsControllerTest {
     @MockBean
     private AirportService airportService;
 
+    @MockBean
+    private AirportDtoMapper airportDtoMapper;
+
     @Test
     public void whenGetAirportsShouldReturnJsonArray() throws Exception {
-        Airport AAL = new Airport("AAL", "AAL", "DK", "Airport", 2, "Europe/Copenhagen");
+        Airport AAL = Airport.builder()
+                .airportCode("AAL")
+                .cityCode("AAL")
+                .countryCode("DK")
+                .utcOffset(2)
+                .timeZoneId("European/Copenhagen")
+                .build();
 
         List<Airport> allAirports = Collections.singletonList(AAL);
 
@@ -43,6 +53,6 @@ public class FlightAirportsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].AirportCode", is(AAL.getAirportCode())));
+                .andExpect(jsonPath("$[0].airportCode", is(AAL.getAirportCode())));
     }
 }

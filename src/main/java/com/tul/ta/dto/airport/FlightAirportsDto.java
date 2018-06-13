@@ -1,10 +1,11 @@
-package com.tul.ta.model.airport;
+package com.tul.ta.dto.airport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class FlightAirports {
+public class FlightAirportsDto {
+
     @JsonProperty(value = "AirportResource")
-    public AirportResource airportResource;
+    public AirportResourceDto airportResource;
 }

@@ -1,14 +1,12 @@
 package com.tul.ta.model.schedule;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Arrival {
 
-    @JsonProperty(value = "AirportCode")
     public String airportCode;
-
-    @JsonProperty(value = "ScheduledTimeLocal")
-    public ScheduledTimeLocal scheduledTimeLocal;
+    public String scheduledTimeLocal;
 }

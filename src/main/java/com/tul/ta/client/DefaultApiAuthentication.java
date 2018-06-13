@@ -9,7 +9,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-public class DefaultApiAuthentication implements ApiAuthentication{
+public class DefaultApiAuthentication implements ApiAuthentication {
     private static Logger logger = LoggerFactory.getLogger(DefaultApiAuthentication.class);
 
     private final static String BASE_API_AUTHENTICATE_URL = "https://api.lufthansa.com/v1/oauth/token";
@@ -24,7 +24,7 @@ public class DefaultApiAuthentication implements ApiAuthentication{
 
     private final RestTemplate restTemplateAuthorizationClient;
 
-    public DefaultApiAuthentication(){
+    public DefaultApiAuthentication() {
         restTemplateAuthorizationClient = new RestTemplate();
         int retry = 0;
         boolean isAccessTokenGranted = false;
@@ -34,7 +34,7 @@ public class DefaultApiAuthentication implements ApiAuthentication{
         }
         if (!isAccessTokenGranted) {
             logger.info("Authentication aborted after " + maxRetries + " retries.");
-            throw new IllegalStateException () ;
+            throw new IllegalStateException();
         }
     }
 
@@ -52,7 +52,7 @@ public class DefaultApiAuthentication implements ApiAuthentication{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("client_id", clientId);
         map.add("client_secret", clientSecret);
         map.add("grant_type", "client_credentials");
@@ -72,6 +72,6 @@ public class DefaultApiAuthentication implements ApiAuthentication{
         } catch (HttpClientErrorException e) {
             logger.info("Authorization error while asking for token");
         }
-        return true;
+        return true; //TODO bool logic
     }
 }

@@ -21,15 +21,22 @@ public class AirportRepositoryTest {
     private AirportRepository airportRepository;
 
     @Test
-    public void whenFindByAirportCodeThenReturnAirport () {
+    public void whenFindByAirportCodeThenReturnAirport() {
         //given
-        Airport AAL = new Airport("AAL", "AAL", "DK", "Airport", 2, "Europe/Copenhagen");
+        Airport AAL = Airport.builder()
+                .airportCode("AAL")
+                .cityCode("AAL")
+                .countryCode("DK")
+                .utcOffset(2)
+                .timeZoneId("European/Copenhagen")
+                .build();
+
         entityManager.persist(AAL);
         entityManager.flush();
 
         //when
         Airport found = airportRepository.findById(AAL.getAirportCode())
-        .orElseThrow(() -> new ResourceNotFoundException("Airport", "id", AAL.getAirportCode()));
+                .orElseThrow(() -> new ResourceNotFoundException("Airport", "id", AAL.getAirportCode()));
 
         //then
         Assert.assertEquals(found.getAirportCode(), AAL.getAirportCode());

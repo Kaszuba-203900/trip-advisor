@@ -1,7 +1,7 @@
 package com.tul.ta.client;
 
-import com.tul.ta.model.airport.Airport;
-import com.tul.ta.model.airport.FlightAirports;
+import com.tul.ta.dto.airport.FlightAirportsDto;
+import com.tul.ta.mapper.AirportDtoMapper;
 import com.tul.ta.service.AirportService;
 import com.tul.ta.util.HttpQueryUtils;
 import org.slf4j.Logger;
@@ -23,6 +23,9 @@ public class DefaultFlightApiCommunicator implements FlightApiCommunicator {
     @Autowired
     private AirportService airportService;
 
+    @Autowired
+    private AirportDtoMapper airportDtoMapper;
+
     //@Scheduled(fixedDelay = 60000)
     @PostConstruct
     @Override
@@ -32,16 +35,11 @@ public class DefaultFlightApiCommunicator implements FlightApiCommunicator {
                 .queryParam("limit", 100)
                 .queryParam("LHoperated", false);
 
-        FlightAirports airports = null;
         try {
-            airports = httpClient.executeQuery(builder.toUriString(), FlightAirports.class);
+            FlightAirportsDto flightAirports = httpClient.executeQuery(builder.toUriString(), FlightAirportsDto.class);
+            flightAirports.getAirportResource().getAirports().getAirport().forEach(a -> airportService.save(airportDtoMapper.mapToEntity(a)));
         } catch (HttpClientErrorException e) {
             logger.error(e.toString());
-        }
-
-        for (Airport a: airports.getAirportResource().getAirports().getAirport()
-                ) {
-            this.airportService.save(a);
         }
     }
 }

@@ -38,5 +38,6 @@ public class AppConfig {
     @Bean
     public FlightApiCommunicator flightApiCommunicator() {
         logger.info("DefaultFlightApiCommunicator init");
-        return new DefaultFlightApiCommunicator();}
+        return new DefaultFlightApiCommunicator();
+    }
 }

@@ -1,11 +1,12 @@
 package com.tul.ta.model.airport;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Position {
 
-    @JsonProperty(value = "Coordinate")
     public Coordinate coordinate;
 }

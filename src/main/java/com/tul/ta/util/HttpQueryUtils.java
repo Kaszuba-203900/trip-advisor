@@ -46,7 +46,7 @@ public class HttpQueryUtils {
             if (status > 299) {
                 if (status == 401) {
                     logger.info("Authentication error. Token will be refreshed");
-                    if(counter < maxRetries) {
+                    if (counter < maxRetries) {
                         counter++;
                         if (apiAuthentication.updateAccessToken()) {
                             logger.info("Token succesfully refreshed");

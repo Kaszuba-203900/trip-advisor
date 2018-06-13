@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DefaultAirportService implements AirportService{
+public class DefaultAirportService implements AirportService {
 
     @Autowired
     private AirportRepository airportRepository;

@@ -1,7 +1,7 @@
 package com.tul.ta.util;
 
 import com.tul.ta.client.ApiAuthentication;
-import com.tul.ta.model.schedule.FlightSchedules;
+import com.tul.ta.model.schedule.Flight;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
@@ -26,13 +26,13 @@ public class HttpQueryUtilsTest {
     private URI uri = URI.create("http://localhost");
 
     @Before
-    public void init () {
-        ResponseEntity<FlightSchedules> myEntity = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    public void init() {
+        ResponseEntity<Flight> myEntity = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         Mockito.when(restTemplateMock.exchange(
                 ArgumentMatchers.eq(uri.toString()),
                 ArgumentMatchers.eq(HttpMethod.GET),
-                ArgumentMatchers.<HttpEntity<FlightSchedules>>any(),
-                ArgumentMatchers.<Class<FlightSchedules>>any()
+                ArgumentMatchers.<HttpEntity<Flight>>any(),
+                ArgumentMatchers.<Class<Flight>>any()
         )).thenReturn(myEntity);
     }
 
@@ -42,9 +42,8 @@ public class HttpQueryUtilsTest {
 
         int maxRetried = 3;
         try {
-            httpClient.executeQuery(uri.toString(), FlightSchedules.class, apiAuthenticationMock, restTemplateMock);
-        }
-        finally {
+            httpClient.executeQuery(uri.toString(), Flight.class, apiAuthenticationMock, restTemplateMock);
+        } finally {
             Mockito.verify(apiAuthenticationMock, Mockito.times(maxRetried)).updateAccessToken();
         }
     }

@@ -1,10 +1,11 @@
-package com.tul.ta.model.schedule;
+package com.tul.ta.dto.schedule;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class DatePeriod {
+public class DatePeriodDto {
+
     @JsonProperty(value = "Effective")
     public String effective;
 

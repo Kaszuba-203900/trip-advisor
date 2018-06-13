@@ -1,10 +1,11 @@
-package com.tul.ta.model.schedule;
+package com.tul.ta.dto.airport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class Terminal {
+public class NamesDto {
+
     @JsonProperty(value = "Name")
-    public Integer name;
+    public NameDto name;
 }

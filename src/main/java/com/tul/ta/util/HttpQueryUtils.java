@@ -1,6 +1,6 @@
 package com.tul.ta.util;
 
-import com.tul.ta.client.authentication.ApiAuthentication;
+import com.tul.ta.client.ApiAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class HttpQueryUtils {
         }
     }
 
-    //think about what is better to use, HttpEntity or RequestEntity?
+    //TODO think about what is better to use, HttpEntity or RequestEntity?
     public <T> T invoke(URI url, Class<T> responseType) {
         RequestEntity<?> request = RequestEntity
                 .get(url)

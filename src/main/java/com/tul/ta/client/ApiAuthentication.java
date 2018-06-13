@@ -1,4 +1,4 @@
-package com.tul.ta.client.authentication;
+package com.tul.ta.client;
 
 public interface ApiAuthentication {
     String getAccessToken() ;

@@ -42,7 +42,7 @@ public class DefaultFlightService implements FlightService{
         try {
             jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(schedule);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
         return jsonInString;
     }

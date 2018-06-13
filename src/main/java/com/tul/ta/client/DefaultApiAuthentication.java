@@ -1,4 +1,4 @@
-package com.tul.ta.client.authentication;
+package com.tul.ta.client;
 
 import com.tul.ta.response.Authenticate;
 import org.slf4j.Logger;

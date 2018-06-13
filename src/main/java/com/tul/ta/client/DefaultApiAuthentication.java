@@ -20,7 +20,6 @@ public class DefaultApiAuthentication implements ApiAuthentication {
 
     private String tokenType = "";
     private final int maxRetries = 3;
-    private boolean isAccessTokenGranted = false;
 
     private final RestTemplate restTemplateAuthorizationClient;
 

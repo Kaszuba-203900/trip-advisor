@@ -6,16 +6,3 @@ install:
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 services:
 - mysql
-dist: trusty
-addons:
-  apt:
-    packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
-before_script:
-- mysql -u root -e 'CREATE DATABASE trip_advisor_db;'
-- mysql -u root -e "CREATE USER 'root'@'localhost' IDENTIFIED BY 'root';"
-- mysql -u root -e "GRANT ALL ON trip_advisor_test.* TO 'root'@'localhost'; FLUSH PRIVILEGES;"
-before_install:
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('mysql123') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"

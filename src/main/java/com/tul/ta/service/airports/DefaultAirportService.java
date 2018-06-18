@@ -1,4 +1,4 @@
-package com.tul.ta.service;
+package com.tul.ta.service.airports;
 
 import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.airport.Airport;

@@ -2,7 +2,7 @@ package com.tul.ta.controller;
 
 import com.tul.ta.mapper.AirportDtoMapper;
 import com.tul.ta.model.airport.Airport;
-import com.tul.ta.service.AirportService;
+import com.tul.ta.service.airports.AirportService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

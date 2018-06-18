@@ -3,6 +3,8 @@ package com.tul.ta.service;
 import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.airport.Airport;
 import com.tul.ta.repository.AirportRepository;
+import com.tul.ta.service.airports.AirportService;
+import com.tul.ta.service.airports.DefaultAirportService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class AirportServiceTest {
 
     @Test
     public void serviceClasspathShouldBeCorrect() {
-        assertEquals("class com.tul.ta.service.DefaultAirportService", airportService.getClass().toString() );
+        assertEquals("class com.tul.ta.service.airports.DefaultAirportService", airportService.getClass().toString() );
     }
 
     @Test(expected = ResourceNotFoundException.class)

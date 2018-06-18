@@ -9,15 +9,17 @@ public class Weather {
     private int highTemperature;
     private String description;
     private String date;
+    private String city;
 
     public Weather() {
     }
 
-    public Weather(int lowTemperature, int highTemperature, String description, Date date) {
+    public Weather(int lowTemperature, int highTemperature, String description, Date date, String city) {
         this.lowTemperature = lowTemperature;
         this.highTemperature = highTemperature;
         this.description = description;
-        this.date = new SimpleDateFormat("yyyyMMdd").format(date);
+        this.date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        this.city = city;
     }
 
     public int getLowTemperature() {
@@ -52,8 +54,16 @@ public class Weather {
         this.date = date;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public String toString() {
-        return "[" + date + "] " + description + " lowest temperature: " + lowTemperature + " Highest temperature: " + highTemperature;
+        return "[" + date + "] " + city  + " " + description + " lowest temperature: " + lowTemperature + " Highest temperature: " + highTemperature;
     }
 }

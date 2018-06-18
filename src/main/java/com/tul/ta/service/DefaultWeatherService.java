@@ -39,7 +39,7 @@ public class DefaultWeatherService implements WeatherService {
         } catch (JAXBException | IOException e) {
             logger.warn("Problem while retreiving weather {}", e);
         }
-        Weather weather = new Weather(current.getLow(), current.getHigh(), current.getText(), current.getDate());
+        Weather weather = new Weather(current.getLow(), current.getHigh(), current.getText(), current.getDate(), city);
         logger.info("Sending weather: {}", weather);
         return weather;
     }
@@ -62,7 +62,7 @@ public class DefaultWeatherService implements WeatherService {
         } catch (JAXBException | IOException e) {
             logger.warn("Problem while retreiving weather {}", e);
         }
-        Weather weather = new Weather(current.getLow(), current.getHigh(), current.getText(), current.getDate());
+        Weather weather = new Weather(current.getLow(), current.getHigh(), current.getText(), current.getDate(), city);
         logger.info("Sending weather: {}", weather);
         return weather;
     }

@@ -67,7 +67,6 @@ public class DefaultWeatherService implements WeatherService {
         return weather;
     }
 
-    //Default code is for Warsaw
     private String getWOEIDByCity(String city) {
         logger.info("Trying to get WOEID for {}", city);
         String url = "http://query.yahooapis.com/v1/public/yql?q=select*from%20geo.places%20where%20text=%22" + city + "%22&format=json";

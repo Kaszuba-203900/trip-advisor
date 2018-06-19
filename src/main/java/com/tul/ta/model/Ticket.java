@@ -39,6 +39,6 @@ public class Ticket {
 
     @Tolerate
     public Ticket(){
-        
+
     }
 }

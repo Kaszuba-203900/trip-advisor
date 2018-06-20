@@ -17,7 +17,7 @@ public class TicketDto {
     @JsonProperty("DepartureCityName")
     public String departureCityName;
     @JsonProperty("DateOfFlight")
-    public Date dateOfFlight;
+    public String dateOfFlight;
     @JsonProperty("Price")
     public Double price;
 
@@ -32,7 +32,7 @@ public class TicketDto {
 
     @JsonCreator
     public TicketDto(@JsonProperty("TicketId") Long ticketId, @JsonProperty("OriginCityName") String originCityName, @JsonProperty("DepartureCityName") String departureCityName,
-                     @JsonProperty("DateOfFlight") Date dateOfFlight, @JsonProperty("Price") Double price) {
+                     @JsonProperty("DateOfFlight") String dateOfFlight, @JsonProperty("Price") Double price) {
         this.ticketId = ticketId;
         this.originCityName = originCityName;
         this.departureCityName = departureCityName;

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,9 +50,15 @@ public class TripController {
             @RequestParam(value = "departureDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate departureDate
     ) {
         FlightSchedulesDto flightSchedulesDto = this.flightService.getSchedules(AirportCode.valueOf(origin), AirportCode.valueOf(destination), departureDate.toString(), true);
-        List<Flight> flights = new ArrayList<>();
-        flightSchedulesDto.getScheduleResource().getSchedule().forEach(s -> flights.add(flightDtoMapper.mapToEntity(s.flight)));
-        Trip trip = new Trip(flights, weatherService.getWeatherByCityWithDate(getCityName(airportService.getAirportById(destination).getCityName()), departureDate.toString()));
-        return ResponseEntity.ok(trip);
+         try {
+             List<Flight> flights = new ArrayList<>();
+             flightSchedulesDto.getScheduleResource().getSchedule().forEach(s -> flights.add(flightDtoMapper.mapToEntity(s.flight)));
+             Trip trip = new Trip(flights, weatherService.getWeatherByCityWithDate(getCityName(airportService.getAirportById(destination).getCityName()), departureDate.toString()));
+             return ResponseEntity.ok(trip);
+         } catch (NullPointerException e) {
+             logger.info("Flights not found");
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Flights not found");
+         }
+
     }
 }

@@ -41,4 +41,17 @@ public class Airport {
     public Airport() {
 
     }
+
+    public String getOneCityName(){
+        String arr[] = new String[2];
+        if(cityName.contains("/")) {
+            arr = cityName.split("/", 2);
+            return arr[0];
+        } if(cityName.contains(" ")) {
+            arr = cityName.split(" ", 2);
+            return arr[0];
+        } else {
+            return cityName;
+        }
+    }
 }

@@ -20,6 +20,7 @@ public class TicketDto {
     @JsonProperty("Price")
     public Double price;
 
+
     @JsonCreator
     public TicketDto(@JsonProperty("TicketId") Long ticketId, @JsonProperty("OriginCityName") String originCityName, @JsonProperty("DepartureCityName") String departureCityName,
                      @JsonProperty("DateOfFlight") String dateOfFlight, @JsonProperty("Price") Double price) {

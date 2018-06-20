@@ -13,24 +13,24 @@ public class FlightDtoMapper implements Mapper<Flight, FlightDto> {
     public Flight mapToEntity(FlightDto dto) {
         Departure departure = Departure.builder()
                 .airportCode(dto.getDeparture().getAirportCode())
-                .scheduledTimeLocal(dto.getDeparture().getScheduledTimeLocal().getDateTime())
-                .terminal(dto.getDeparture().getTerminal().getName()).build();
+                .scheduledTimeLocal(dto.getDeparture().getScheduledTimeLocal().getDateTime()).build();
+                //.terminal(dto.getDeparture().getTerminal().getName()).build();
 
         Arrival arrival = Arrival.builder()
                 .airportCode(dto.getArrival().getAirportCode())
                 .scheduledTimeLocal(dto.getArrival().getScheduledTimeLocal().getDateTime())
                 .build();
 
-        MarketingCarrier marketingCarrier = MarketingCarrier.builder()
-                .airlineID(dto.getMarketingCarrier().getAirlineID())
-                .flightNumber(dto.getMarketingCarrier().getFlightNumber())
-                .build();
+//        MarketingCarrier marketingCarrier = MarketingCarrier.builder()
+//                .airlineID(dto.getMarketingCarrier().getAirlineID())
+//                .flightNumber(dto.getMarketingCarrier().getFlightNumber())
+//                .build();
 
 
         return Flight.builder()
                 .departure(departure)
                 .arrival(arrival)
-                .marketingCarrier(marketingCarrier)
+                //.marketingCarrier(marketingCarrier)
                 .build();
     }
 

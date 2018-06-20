@@ -9,5 +9,5 @@ public class Departure {
 
     public String airportCode;
     public String scheduledTimeLocal;
-    public Integer terminal;
+    //public Integer terminal;
 }

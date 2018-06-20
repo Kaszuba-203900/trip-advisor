@@ -19,23 +19,25 @@ public class Ticket {
     @Id
     @Column(name = "ticket_id")
     public Integer ticketId;
-    @Column(name = "from_city")
-    public String fromCityName;
-    @Column(name = "to_city")
-    public String toCityName;
+    @Column(name = "origin_city")
+    public String originCityName;
+    @Column(name = "departure_city")
+    public String departureCityName;
     @Column(name = "date_of_flight")
     public Date dateOfFlight;
     @Column(name = "price")
     public Double price;
 
     @Builder
-    public Ticket(Integer ticketId, String fromCityName, String toCityName, Date dateOfFlight, Double price) {
+    public Ticket(Integer ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
         this.ticketId = ticketId;
-        this.fromCityName = fromCityName;
-        this.toCityName = toCityName;
+        this.originCityName = originCityName;
+        this.departureCityName = departureCityName;
         this.dateOfFlight = dateOfFlight;
         this.price = price;
     }
+
+
 
     @Tolerate
     public Ticket(){

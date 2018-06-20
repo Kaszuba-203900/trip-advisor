@@ -18,7 +18,7 @@ import java.util.Date;
 public class Ticket {
     @Id
     @Column(name = "ticket_id")
-    public Integer ticketId;
+    public Long ticketId;
     @Column(name = "origin_city")
     public String originCityName;
     @Column(name = "departure_city")
@@ -29,7 +29,7 @@ public class Ticket {
     public Double price;
 
     @Builder
-    public Ticket(Integer ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
+    public Ticket(Long ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
         this.ticketId = ticketId;
         this.originCityName = originCityName;
         this.departureCityName = departureCityName;

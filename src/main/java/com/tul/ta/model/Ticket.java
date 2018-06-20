@@ -24,12 +24,12 @@ public class Ticket {
     @Column(name = "departure_city")
     public String departureCityName;
     @Column(name = "date_of_flight")
-    public Date dateOfFlight;
+    public String dateOfFlight;
     @Column(name = "price")
     public Double price;
 
     @Builder
-    public Ticket(Long ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
+    public Ticket(Long ticketId, String originCityName, String departureCityName, String dateOfFlight, Double price) {
         this.ticketId = ticketId;
         this.originCityName = originCityName;
         this.departureCityName = departureCityName;

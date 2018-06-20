@@ -30,16 +30,21 @@ public class DefaultFlightApiCommunicator implements FlightApiCommunicator {
     @PostConstruct
     @Override
     public void getAirports() {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(BASE_API_URL + "/references/airports")
-                .queryParam("lang", "EN")
-                .queryParam("limit", 100)
-                .queryParam("LHoperated", false);
+        for(int i=1; i< 3; i++) {
+            int limit = 100 * i;
+            int offset = limit - 99;
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(BASE_API_URL + "/references/airports")
+                    .queryParam("lang", "EN")
+                    .queryParam("limit", limit)
+                    .queryParam("offset", offset)
+                    .queryParam("LHoperated", false);
 
-        try {
-            FlightAirportsDto flightAirports = httpClient.executeQuery(builder.toUriString(), FlightAirportsDto.class);
-            flightAirports.getAirportResource().getAirports().getAirport().forEach(a -> airportService.save(airportDtoMapper.mapToEntity(a)));
-        } catch (HttpClientErrorException e) {
-            logger.error(e.toString());
+            try {
+                FlightAirportsDto flightAirports = httpClient.executeQuery(builder.toUriString(), FlightAirportsDto.class);
+                flightAirports.getAirportResource().getAirports().getAirport().forEach(a -> airportService.save(airportDtoMapper.mapToEntity(a)));
+            } catch (HttpClientErrorException e) {
+                logger.error(e.toString());
+            }
         }
     }
 }

@@ -9,5 +9,5 @@ public class Flight {
 
     public Departure departure;
     public Arrival arrival;
-    public MarketingCarrier marketingCarrier;
+    //public MarketingCarrier marketingCarrier;
 }

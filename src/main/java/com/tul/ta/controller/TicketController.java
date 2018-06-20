@@ -1,5 +1,4 @@
 package com.tul.ta.controller;
-
 import com.tul.ta.dto.TicketDto;
 import com.tul.ta.mapper.TicketDtoMapper;
 import com.tul.ta.model.Ticket;
@@ -10,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @RestController
 @RequestMapping("/api")

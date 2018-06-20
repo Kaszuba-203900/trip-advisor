@@ -3,6 +3,9 @@ package com.tul.ta.controller;
 import com.tul.ta.mapper.TicketDtoMapper;
 import com.tul.ta.model.Ticket;
 import com.tul.ta.model.airport.Airport;
+import com.tul.ta.model.schedule.Arrival;
+import com.tul.ta.model.schedule.Departure;
+import com.tul.ta.model.schedule.Flight;
 import com.tul.ta.service.TicketService;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
@@ -10,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.web.JsonPath;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +33,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,9 +58,9 @@ public class TicketControllerTest {
         Double price = generator.nextDouble()*1000;
         Ticket ticket = Ticket.builder()
                 .ticketId(id)
-                .originCityName("Lodz")
-                .departureCityName("Paris")
-                .dateOfFlight(new Date(2018, 6, 20))
+                .originCityName("LDZ")
+                .departureCityName("PAR")
+                .dateOfFlight("2018-06-30T06:00")
                 .price(price).build();
 
         List<Ticket> allTickets = Collections.singletonList(ticket);
@@ -65,7 +70,7 @@ public class TicketControllerTest {
         mockMvc.perform(get("/api/tickets")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(jsonPath("$", hasSize(1))).andDo(print());
 
     }
 
@@ -74,11 +79,17 @@ public class TicketControllerTest {
         long id = 0;
         Random generator = new Random();
         Double price = generator.nextDouble()*1000;
+        Flight flight = Flight.builder()
+                .arrival(Arrival.builder().airportCode("KRK")
+                        .scheduledTimeLocal("2018-07-15T06:00").build())
+                .departure(Departure.builder()
+                        .airportCode("MUC")
+                        .scheduledTimeLocal("2018-07-15T07:15").build()).build();
         Ticket ticket = Ticket.builder()
                 .ticketId(id)
-                .originCityName("Lodz")
-                .departureCityName("Paris")
-                .dateOfFlight(new Date(2018, 6, 20))
+                .originCityName(flight.getArrival().getAirportCode())
+                .departureCityName(flight.getDeparture().getAirportCode())
+                .dateOfFlight(flight.getArrival().getScheduledTimeLocal())
                 .price(price).build();
         when(ticketService.save(ticket)).thenReturn(ticket);
         mockMvc.perform(post("/api/tickets")
@@ -86,8 +97,8 @@ public class TicketControllerTest {
                 .content(asJsonString(ticket))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-                verify(ticketService, times(1)).save(ticket);
-                verifyNoMoreInteractions(ticketService);
+
+
 
     }
 
@@ -96,7 +107,7 @@ public class TicketControllerTest {
         try {
             final ObjectMapper mapper = new ObjectMapper();
             jsonContent = mapper.writeValueAsString(ticket);
-            System.out.println(jsonContent);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

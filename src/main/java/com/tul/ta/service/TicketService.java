@@ -1,9 +1,11 @@
 package com.tul.ta.service;
 
-import com.tul.ta.repository.TicketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tul.ta.model.Ticket;
 
-public class TicketService {
-    @Autowired
-    TicketRepository ticketRepository;
+import java.util.List;
+
+public interface TicketService {
+    List<Ticket> findAll();
+    Ticket save(final Ticket ticket);
+
 }

@@ -5,12 +5,6 @@ import com.tul.ta.model.Ticket;
 import com.tul.ta.model.schedule.Arrival;
 import com.tul.ta.model.schedule.Departure;
 import com.tul.ta.model.schedule.Flight;
-=======
-
-import com.tul.ta.mapper.TicketDtoMapper;
-import com.tul.ta.model.Ticket;
-import com.tul.ta.model.airport.Airport;
->>>>>>> Added test for GET method in controller
 import com.tul.ta.service.TicketService;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
@@ -21,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +49,6 @@ public class TicketControllerTest {
         Double price = generator.nextDouble()*1000;
         Ticket ticket = Ticket.builder()
                 .ticketId(id)
-
                 .originCityName("LDZ")
                 .departureCityName("PAR")
                 .dateOfFlight("2018-06-30T06:00")

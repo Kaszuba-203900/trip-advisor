@@ -2,13 +2,13 @@ package com.tul.ta.controller;
 
 import com.tul.ta.model.weather.Weather;
 import com.tul.ta.service.DefaultWeatherService;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,7 +34,7 @@ public class WeatherControllerTest {
     private DefaultWeatherService weatherService;
 
     @Test
-    @Ignore
+    @WithMockUser(username = "admin", password = "")
     public void whenGetWeatherForWarsawShouldReturnJsonObect() throws Exception {
         Weather weather = new Weather(20, 25, "Sunny", new Date(), "Warsaw");
         given(weatherService.getWeatherByCity("Warsaw")).willReturn(weather);
@@ -49,11 +49,11 @@ public class WeatherControllerTest {
     }
 
     @Test
-    @Ignore
+    @WithMockUser(username = "admin", password = "")
     public void whenGetWeatherForWarsawWithDateShouldReturnJsonObect() throws Exception {
         String date = "2018-06-22";
         LocalDate wantedDate = parse(date);
-        Weather weather = new Weather(20, 25, "Sunny",  Date.from(wantedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()), "Warsaw");
+        Weather weather = new Weather(20, 25, "Sunny", Date.from(wantedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()), "Warsaw");
         given(weatherService.getWeatherByCityWithDate("Warsaw", date)).willReturn(weather);
         mockMvc.perform(get("/api/weather/Warsaw?date=2018-06-22")
                 .contentType(MediaType.APPLICATION_JSON))

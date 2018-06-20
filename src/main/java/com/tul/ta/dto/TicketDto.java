@@ -1,5 +1,4 @@
 package com.tul.ta.dto;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -20,15 +19,6 @@ public class TicketDto {
     public String dateOfFlight;
     @JsonProperty("Price")
     public Double price;
-
-//    @Builder
-//    public TicketDto(Long ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
-//        this.ticketId = ticketId;
-//        this.originCityName = originCityName;
-//        this.departureCityName = departureCityName;
-//        this.dateOfFlight = dateOfFlight;
-//        this.price = price;
-//    }
 
     @JsonCreator
     public TicketDto(@JsonProperty("TicketId") Long ticketId, @JsonProperty("OriginCityName") String originCityName, @JsonProperty("DepartureCityName") String departureCityName,

@@ -1,4 +1,5 @@
 package com.tul.ta.controller;
+
 import com.tul.ta.dto.TicketDto;
 import com.tul.ta.mapper.TicketDtoMapper;
 import com.tul.ta.model.Ticket;
@@ -43,6 +44,5 @@ public class TicketController {
         List<TicketDto> ticketDtos = tickets.stream().map(ticket -> ticketDtoMapper.mapToDto(ticket)).collect(Collectors.toList());
         return ResponseEntity.ok(ticketDtos);
     }
-
-
+    
 }

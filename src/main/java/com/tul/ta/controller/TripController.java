@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tul.ta.util.StringUtils.*;
+
 
 @RestController
 @RequestMapping("/api/trip")
@@ -49,7 +51,7 @@ public class TripController {
         FlightSchedulesDto flightSchedulesDto = this.flightService.getSchedules(AirportCode.valueOf(origin), AirportCode.valueOf(destination), departureDate.toString(), true);
         List<Flight> flights = new ArrayList<>();
         flightSchedulesDto.getScheduleResource().getSchedule().forEach(s -> flights.add(flightDtoMapper.mapToEntity(s.flight)));
-        Trip trip = new Trip(flights, weatherService.getWeatherByCityWithDate(airportService.getAirportById(destination).getOneCityName(), departureDate.toString()));
+        Trip trip = new Trip(flights, weatherService.getWeatherByCityWithDate(getCityName(airportService.getAirportById(destination).getCityName()), departureDate.toString()));
         return ResponseEntity.ok(trip);
     }
 }

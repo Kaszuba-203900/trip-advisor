@@ -1,8 +1,6 @@
 package com.tul.ta.model.airport;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
@@ -40,18 +38,5 @@ public class Airport {
     @Tolerate
     public Airport() {
 
-    }
-
-    public String getOneCityName(){
-        String arr[] = new String[2];
-        if(cityName.contains("/")) {
-            arr = cityName.split("/", 2);
-            return arr[0];
-        } if(cityName.contains(" ")) {
-            arr = cityName.split(" ", 2);
-            return arr[0];
-        } else {
-            return cityName;
-        }
     }
 }

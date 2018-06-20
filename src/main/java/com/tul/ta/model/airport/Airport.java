@@ -1,8 +1,6 @@
 package com.tul.ta.model.airport;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;

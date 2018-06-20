@@ -10,7 +10,7 @@ import java.util.Date;
 @Builder
 public class TicketDto {
     @JsonProperty("TicketId")
-    public Integer ticketId;
+    public Long ticketId;
     @JsonProperty("OriginCityName")
     public String originCityName;
     @JsonProperty("DepartureCityName")
@@ -22,7 +22,7 @@ public class TicketDto {
 
     @Builder
 
-    public TicketDto(Integer ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
+    public TicketDto(Long ticketId, String originCityName, String departureCityName, Date dateOfFlight, Double price) {
         this.ticketId = ticketId;
         this.originCityName = originCityName;
         this.departureCityName = departureCityName;

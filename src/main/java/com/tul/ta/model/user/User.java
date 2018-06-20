@@ -37,6 +37,12 @@ public class User {
         this.email = email;
     }
 
+    @Builder
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Tolerate
     public User() {
     }

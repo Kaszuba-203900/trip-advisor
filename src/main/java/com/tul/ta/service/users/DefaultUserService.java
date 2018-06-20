@@ -4,6 +4,7 @@ import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.user.User;
 import com.tul.ta.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,11 @@ import java.util.List;
 public class DefaultUserService implements UserService {
 
     @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
     private UserRepository userRepository;
+
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
@@ -28,6 +33,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public void save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.saveAndFlush(user);
     }
 }

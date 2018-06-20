@@ -1,4 +1,4 @@
-package com.tul.ta.service;
+package com.tul.ta.service.flights;
 
 import com.tul.ta.dto.schedule.FlightSchedulesDto;
 import com.tul.ta.enums.AirportCode;

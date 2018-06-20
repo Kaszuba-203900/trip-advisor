@@ -3,6 +3,8 @@ package com.tul.ta.service;
 import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.airport.Airport;
 import com.tul.ta.repository.AirportRepository;
+import com.tul.ta.service.airports.AirportService;
+import com.tul.ta.service.airports.DefaultAirportService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
@@ -39,7 +42,7 @@ public class AirportServiceTest {
 
     @Test
     public void serviceClasspathShouldBeCorrect() {
-        assertEquals("class com.tul.ta.service.DefaultAirportService", airportService.getClass().toString() );
+        assertEquals("class com.tul.ta.service.airports.DefaultAirportService", airportService.getClass().toString() );
     }
 
     @Test(expected = ResourceNotFoundException.class)

@@ -4,7 +4,7 @@ import com.tul.ta.dto.schedule.FlightSchedulesDto;
 import com.tul.ta.enums.AirportCode;
 import com.tul.ta.mapper.FlightDtoMapper;
 import com.tul.ta.model.schedule.Flight;
-import com.tul.ta.service.FlightService;
+import com.tul.ta.service.flights.FlightService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

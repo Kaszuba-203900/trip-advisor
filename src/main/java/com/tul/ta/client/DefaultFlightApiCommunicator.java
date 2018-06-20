@@ -2,7 +2,7 @@ package com.tul.ta.client;
 
 import com.tul.ta.dto.airport.FlightAirportsDto;
 import com.tul.ta.mapper.AirportDtoMapper;
-import com.tul.ta.service.AirportService;
+import com.tul.ta.service.airports.AirportService;
 import com.tul.ta.util.HttpQueryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

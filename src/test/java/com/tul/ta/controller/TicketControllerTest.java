@@ -12,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -41,6 +45,7 @@ public class TicketControllerTest {
     private TicketDtoMapper ticketDtoMapper;
 
     @Test
+    @WithMockUser(username = "admin", password = "")
     public void whenGetTicketsShouldReturnJsonArray() throws Exception {
         long id = 0;
         Random generator = new Random();
@@ -50,7 +55,7 @@ public class TicketControllerTest {
                 .originCityName("LDZ")
                 .departureCityName("PAR")
                 .dateOfFlight("2018-06-30T06:00")
-                .price(price).build();
+                .price(round(price)).build();
 
         List<Ticket> allTickets = Collections.singletonList(ticket);
 
@@ -64,7 +69,8 @@ public class TicketControllerTest {
     }
 
     @Test
-    public void whenSaveTicketThamReturnJson() throws Exception{
+    @WithMockUser(username = "admin", password = "")
+    public void whenSaveTicketThanReturnJson() throws Exception{
         long id = 0;
         Random generator = new Random();
         Double price = generator.nextDouble()*1000;
@@ -79,7 +85,7 @@ public class TicketControllerTest {
                 .originCityName(flight.getArrival().getAirportCode())
                 .departureCityName(flight.getDeparture().getAirportCode())
                 .dateOfFlight(flight.getArrival().getScheduledTimeLocal())
-                .price(price).build();
+                .price(round(price)).build();
         when(ticketService.save(ticket)).thenReturn(ticket);
         mockMvc.perform(post("/api/tickets")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -98,5 +104,11 @@ public class TicketControllerTest {
             e.printStackTrace();
         }
         return jsonContent;
+    }
+
+    private  double round(double value) {
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

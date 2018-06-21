@@ -11,7 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,11 +42,13 @@ public class TicketServiceTest {
     private TicketService ticketService;
 
     @Test
+    @WithMockUser(username = "admin", password = "")
     public void serviceClassesPathShoudBeCorrect(){
         assertEquals("class com.tul.ta.service.DefaultTicketService", ticketService.getClass().toString());
     }
 
     @Test(expected = ResourceNotFoundException.class)
+    @WithMockUser(username = "admin", password = "")
     public void whenValidTicketIdThenTicketShouldBeFound() {
         long id = 0;
         Random generator = new Random();
@@ -57,7 +64,7 @@ public class TicketServiceTest {
                 .originCityName(flight.getArrival().getAirportCode())
                 .departureCityName(flight.getDeparture().getAirportCode())
                 .dateOfFlight(flight.getArrival().getScheduledTimeLocal())
-                .price(price).build();
+                .price(round(price)).build();
 
         when(ticketRepository.findById(ticket.getTicketId())
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", 0)))
@@ -70,6 +77,7 @@ public class TicketServiceTest {
     }
 
     @Test(expected = ResourceNotFoundException.class)
+    @WithMockUser(username = "admin", password = "")
     public void whenFindTicketByIdShouldThrowNotFoundException() throws ResourceNotFoundException {
         long id = 1;
         when(ticketRepository.findById(id)).thenThrow(new ResourceNotFoundException("Airport", "id", id));
@@ -81,6 +89,7 @@ public class TicketServiceTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "")
     public void findAllShouldReturnListOfAirportEntries() {
         List<Ticket> tickets = new ArrayList<>();
         when(ticketRepository.findAll()).thenReturn(tickets);
@@ -88,5 +97,10 @@ public class TicketServiceTest {
         assertEquals(actual, tickets);
     }
 
+    private  double round(double value) {
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 
 }

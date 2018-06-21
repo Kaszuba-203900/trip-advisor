@@ -66,7 +66,7 @@ public class TicketControllerTest {
                 .andExpect(jsonPath("$", hasSize(1))).andDo(print());
 
     }
-
+/*
     @Test
     @WithMockUser(username = "admin", password = "")
     public void whenSaveTicketThanReturnJson() throws Exception{
@@ -92,7 +92,7 @@ public class TicketControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
-
+*/
     public static String asJsonString(Ticket ticket) {
         String jsonContent = "";
         try {

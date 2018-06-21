@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -92,7 +91,6 @@ public class TicketControllerTest {
                 .content(asJsonString(ticket))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 
     public static String asJsonString(Ticket ticket) {
@@ -111,4 +109,5 @@ public class TicketControllerTest {
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
 }

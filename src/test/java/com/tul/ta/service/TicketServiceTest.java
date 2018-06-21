@@ -13,10 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -65,7 +63,6 @@ public class TicketServiceTest {
                 .departureCityName(flight.getDeparture().getAirportCode())
                 .dateOfFlight(flight.getArrival().getScheduledTimeLocal())
                 .price(round(price)).build();
-
         when(ticketRepository.findById(ticket.getTicketId())
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", 0)))
                 .thenReturn(ticket);

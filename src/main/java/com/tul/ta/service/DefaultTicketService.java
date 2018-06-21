@@ -27,5 +27,4 @@ public class DefaultTicketService implements TicketService {
         return ticketRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", id));
     }
-
 }

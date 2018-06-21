@@ -28,13 +28,7 @@ public class TicketController {
         TicketDto saved = ticketDtoMapper.mapToDto(ticketService.save(ticketDtoMapper.mapToEntity(ticketDto)));
         return ResponseEntity.ok(saved);
     }
-/*
-    @RequestMapping(value = "/api/tickets", method = RequestMethod.GET)
-    public ResponseEntity getAllTickets(){
-        List<Ticket> tickets = ticketService.findAll();
-        tickets.sort(Comparator.comparing(Ticket::getTicketId));
-        return ResponseEntity.ok(tickets);
-    }*/
+
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     public ResponseEntity getTickets(){
         List<Ticket> tickets = ticketService.findAll();

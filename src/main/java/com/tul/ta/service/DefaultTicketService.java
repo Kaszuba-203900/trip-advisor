@@ -1,5 +1,4 @@
 package com.tul.ta.service;
-
 import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.Ticket;
 import com.tul.ta.repository.TicketRepository;

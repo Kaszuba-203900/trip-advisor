@@ -1,6 +1,7 @@
 package com.tul.ta.service;
 
 
+import com.tul.ta.exception.ResourceNotFoundException;
 import com.tul.ta.model.Ticket;
 import com.tul.ta.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,8 @@ public class DefaultTicketService implements TicketService {
         return ticketRepository.findAll();
     }
 
+    public Ticket findTicketById(Long id){
+        return ticketRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", id));
+    }
 }

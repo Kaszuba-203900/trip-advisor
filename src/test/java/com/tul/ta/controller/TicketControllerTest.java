@@ -1,8 +1,6 @@
 package com.tul.ta.controller;
-
 import com.tul.ta.mapper.TicketDtoMapper;
 import com.tul.ta.model.Ticket;
-import com.tul.ta.model.airport.Airport;
 import com.tul.ta.model.schedule.Arrival;
 import com.tul.ta.model.schedule.Departure;
 import com.tul.ta.model.schedule.Flight;
@@ -13,28 +11,19 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.web.JsonPath;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -75,7 +64,7 @@ public class TicketControllerTest {
     }
 
     @Test
-    public void saveTicket() throws Exception{
+    public void whenSaveTicketThamReturnJson() throws Exception{
         long id = 0;
         Random generator = new Random();
         Double price = generator.nextDouble()*1000;
